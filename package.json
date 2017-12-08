@@ -1,28 +1,29 @@
 {
-  "name": "vue-scroll",
+  "name": "vue-wheel",
   "version": "2.1.6",
-  "description": "scroll directive for vuejs 2.0",
-  "main": "dist/vue-scroll.common.js",
-  "module": "dist/vue-scroll.esm.js",
-  "unpkg": "dist/vue-scroll.js",
+  "description": "wheel directive for vuejs 2.0",
+  "main": "dist/vue-wheel.common.js",
+  "module": "dist/vue-wheel.esm.js",
+  "unpkg": "dist/vue-wheel.js",
   "scripts": {
     "dev:dist": "rollup -wm -c build/rollup.dev.config.js",
     "build": "node build/build.js"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:wangpin34/vue-scroll"
+    "url": "git@github.com:Tombarr/vue-wheel"
   },
   "bugs": {
-    "url": "https://github.com/wangpin34/vue-scroll/issues"
+    "url": "https://github.com/Tombarr/vue-wheel/issues"
   },
   "keywords": [
+    "js",
     "vue",
     "vuejs",
     "directive",
-    "scroll"
+    "wheel"
   ],
-  "author": "wangpin",
+  "author": "Tombarr",
   "license": "MIT",
   "dependencies": {
     "lodash": "^4.17.4"
@@ -42,7 +43,7 @@
     "zlib": "^1.0.5"
   },
   "browser": {
-    "vue": "vue/dist/vue-scroll.min.js"
+    "vue": "vue/dist/vue-wheel.min.js"
   },
   "files": [
     "dist/**"

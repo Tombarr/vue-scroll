@@ -1,12 +1,12 @@
 /**
-  * vue-scroll v2.1.6
-  * (c) 2017 Wang Pin
+  * vue-wheel v2.1.6
+  * (c) 2017 Thomas Barrasso
   * @license MIT
   */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
-	(global.VueScroll = factory());
+	(global.VueWheel = factory());
 }(this, (function () { 'use strict';
 
 var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
@@ -17131,7 +17131,7 @@ var lodash = createCommonjsModule(function (module, exports) {
 var dom = (function () {
   var listeners = new Map();
 
-  var SCROLL = 'scroll';
+  var WHEEL = 'wheel';
 
   function addEventListener (element, event, funcs, opt) {
 
@@ -17139,33 +17139,15 @@ var dom = (function () {
       var data;
       var target = e.target || e.srcElement;
       e = e || window.e;
-      
-      if (e.type === SCROLL) {
-        if (target === document) {
-          data = { scrollTop: document.body.scrollTop, scrollLeft: document.body.scrollLeft };
-        } else {
-          data = { scrollTop: target.scrollTop, scrollLeft: target.scrollLeft };
-        }
-      }
 
       funcs.forEach(function (f) {
         f(e, data);
       });
     }
-
-    if (lodash.isObject(opt)) {
-      if (lodash.isInteger(opt.throttle) &&  lodash.isFinite(opt.throttle) && opt.throttle > -1) {
-        fn = lodash.throttle(fn, opt.throttle);
-      }
-
-      if (lodash.isInteger(opt.debounce) && lodash.isFinite(opt.debounce) && opt.debounce > -1) {
-        fn = lodash.debounce(fn, opt.debounce);
-      }
-    }
     
-    // https://github.com/wangpin34/vue-scroll/issues/1
-    if (event === SCROLL) {
-      if(element === document.body || element === document || element === window) {
+    // https://github.com/Tombarr/vue-wheel/issues/1
+    if (event === WHEEL) {
+      if (element === document.body || element === document || element === window) {
         document.onscroll = fn;
       } else {
         if (element.addEventListener) {
@@ -17184,7 +17166,7 @@ var dom = (function () {
     var funcs, eventFuncs;
 
     if (!lodash.isFunction(fn)) {
-      throw new Error('Scroll handler is not a function');
+      throw new Error('Wheel handler is not a function');
     }
 
     if (!listeners.has(element)) {
@@ -17243,38 +17225,26 @@ var dom = (function () {
 
 })();
 
-var vuescroll = new Object;
+var vuewheel = new Object;
 
-vuescroll.install = function (Vue, options) {
+vuewheel.install = function (Vue, options) {
 
   options = options || {};
-  var SCROLL = 'scroll';
-  var THROTTLE = 'throttle';
-  var DEBOUNCE = 'debounce';
-  var VALID_ARGS = [THROTTLE, DEBOUNCE];
+  var WHEEL = 'wheel';
 
   function bindValue (el, value, arg) {
     var fn, opt = Object.assign({}, options);
     if (lodash.isObject(value) || lodash.isFunction(value)) {
       fn = value;
 
-      if (VALID_ARGS.indexOf(arg) > -1) {
-        fn = value.fn;
-        if (arg === THROTTLE) {
-          opt = { throttle: value.throttle};
-        } else if(arg === DEBOUNCE) {
-          opt = { debounce: value.debounce};
-        }
-      }
-
       try {
-        dom.bind(el, SCROLL, fn, opt);
+        dom.bind(el, WHEEL, fn, opt);
       } catch(err) {
         console.warn('Unexpected error happened when binding listener');
       }
       
     } else {
-      console.warn('Unexpected scroll properties');
+      console.warn('Unexpected wheel properties');
     }
   }
 
@@ -17282,21 +17252,19 @@ vuescroll.install = function (Vue, options) {
     var fn;
     if (lodash.isObject(value) || lodash.isFunction(value)) {
       fn = value;
-      if (VALID_ARGS.indexOf(arg) > -1)  {
-        fn = value.fn;
-      }
-      dom.unbind(el, SCROLL, fn);
+
+      dom.unbind(el, WHEEL, fn);
     }
   }
 
-  Vue.directive(SCROLL, {
+  Vue.directive(WHEEL, {
 
     bind: function(el, binding, vnode, oldVnode) {
       bindValue(el, binding.value, binding.arg);
     },
 
     inserted: function(el, binding) {
-        //To do, check whether element is scrollable and give warn message when not
+        // To do, check whether element is scrollable and give warn message when not
     },
 
     update: function(el, binding) {
@@ -17315,6 +17283,6 @@ vuescroll.install = function (Vue, options) {
 
 };
 
-return vuescroll;
+return vuewheel;
 
 })));

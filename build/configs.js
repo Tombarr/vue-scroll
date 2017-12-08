@@ -8,8 +8,8 @@ const strip = require('rollup-plugin-strip')
 const version = process.env.VERSION || require('../package.json').version
 const banner =
 `/**
-  * vue-scroll v${version}
-  * (c) ${new Date().getFullYear()} Wang Pin
+  * vue-wheel v${version}
+  * (c) ${new Date().getFullYear()} Thomas Barrasso
   * @license MIT
   */`
 
@@ -18,21 +18,21 @@ const resolve = _path => path.resolve(__dirname, '../', _path)
 module.exports = [
   // browser dev
   {
-    file: resolve('dist/vue-scroll.js'),
+    file: resolve('dist/vue-wheel.js'),
     format: 'umd',
     env: 'development'
   },
   {
-    file: resolve('dist/vue-scroll.min.js'),
+    file: resolve('dist/vue-wheel.min.js'),
     format: 'umd',
     env: 'production'
   },
   {
-    file: resolve('dist/vue-scroll.common.js'),
+    file: resolve('dist/vue-wheel.common.js'),
     format: 'cjs'
   },
   {
-    file: resolve('dist/vue-scroll.esm.js'),
+    file: resolve('dist/vue-wheel.esm.js'),
     format: 'es'
   }
 ].map(genConfig)
@@ -67,7 +67,7 @@ function genConfig (opts) {
       file: opts.file,
       format: opts.format,
       banner,
-      name: 'VueScroll'
+      name: 'VueWheel'
     }
   }
 
