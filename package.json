@@ -1,5 +1,5 @@
 {
-  "name": "vue-wheel",
+  "name": "vuewheel",
   "version": "2.1.6",
   "description": "wheel directive for vuejs 2.0",
   "main": "dist/vue-wheel.common.js",
@@ -23,7 +23,7 @@
     "directive",
     "wheel"
   ],
-  "author": "Tombarr",
+  "author": "tombarr",
   "license": "MIT",
   "dependencies": {
     "lodash": "^4.17.4"

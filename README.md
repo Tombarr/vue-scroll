@@ -1,10 +1,20 @@
 # vue-wheel
 wheel directive for [vuejs 2.0](https://vuejs.org/v2/guide/)
 
+Just use native event handlers like:
+
+```
+<template>
+  <ul v-on:wheel="onWheel">
+    <li></li>
+  </ul>
+</template>
+```
+
 ## Installation
 ### NPM (recommended)
 ```
-npm install vue-wheel --save
+npm install vuewheel --save
 ```
 ### Standalone
 
@@ -14,7 +24,7 @@ Simple download from [releases](https://github.com/Tombarr/vue-wheel/releases) a
 
 ```javascript
 import Vue from 'vue'
-import vuewheel from 'vue-wheel'
+import vuewheel from 'vuewheel'
 
 Vue.use(vuewheel)
 ```
